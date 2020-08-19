@@ -41,22 +41,22 @@ public void setup() {
 public void setScene(String sceneStr) {
   switch (sceneStr) {
     case "mainMenu":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = mainMenu;
     case "levelEditor":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = levelEditor;
     case "levelPlayer":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = levelPlayer;
     case "help":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = help;
     case "about":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = about;
     case "credits":
-      scene.switchScene();
+      scene.resetPreviousButtons();
       scene = credits;
   }
 }

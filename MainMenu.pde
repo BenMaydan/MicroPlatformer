@@ -1,76 +1,54 @@
-import interfascia.*;
-
-
-
-
-GUIController gc;
-
-
-Scene scene;
-MainMenu mainMenu;
-Scene levelEditor;
-Scene levelPlayer;
-Scene help;
-Scene about;
-Scene credits;
-
-
-IFLookAndFeel defaultLook;
-IFLookAndFeel greenLook;
-
-
-
-
-public void setup() {
-  background(255);
-  size(800, 800);
+public class MainMenu extends Scene {
   
-  gc = new GUIController(this);
+  IFButton levelEditor;
+  IFButton levelPlayer;
+  IFButton help;
+  IFButton about;
+  IFButton credits;
   
-  defaultLook = new IFLookAndFeel(this, IFLookAndFeel.DEFAULT);
-  greenLook = new IFLookAndFeel(this, IFLookAndFeel.DEFAULT);
-  greenLook.baseColor = color(100, 180, 100);
-  greenLook.highlightColor = color(70, 135, 70);
-  greenLook.activeColor = color(3, 144, 252);
-  
-  mainMenu = new MainMenu(color(100));
-  mainMenu.createButtons();
-  scene = mainMenu.setupScene();
-  
-  levelEditor = new LevelEditor(color(255));
-  levelEditor.createButtons();
-}
-
-
-public void setScene(String sceneStr) {
-  switch (sceneStr) {
-    case "mainMenu":
-      switchScene(mainMenu);
-      break;
-    case "levelEditor":
-      switchScene(levelEditor);
-      break;
-    case "levelPlayer":
-      switchScene(levelPlayer);
-      break;
-    case "help":
-      switchScene(help);
-      break;
-    case "about":
-      switchScene(about);
-      break;
-    case "credits":
-      switchScene(credits);
-      break;
+  public MainMenu(color bg_color) {
+    super(bg_color);
   }
-}
-
-public void switchScene(Scene s) {
-  scene.reset();
-  scene = s.setupScene();
-}
-
-
-public void draw() {
-  scene.show();
+  
+  public void createButtons() {
+    levelEditor = new IFButton("Level Editor", 10, 10);
+    levelPlayer = new IFButton("Level Player", 10, 40);
+    help = new IFButton("Help", 10, 70);
+    about = new IFButton("About", 10, 100);
+    credits = new IFButton("Credits", 10, 130);
+    
+    levelEditor.addActionListener(this);
+    levelPlayer.addActionListener(this);
+    help.addActionListener(this);
+    about.addActionListener(this);
+    credits.addActionListener(this);
+  }
+  
+  public Scene setupScene() {
+    gc.setLookAndFeel(greenLook);
+    addButton(levelEditor);
+    addButton(levelPlayer);
+    addButton(help);
+    addButton(about);
+    addButton(credits);
+    return this;
+  }
+  
+  public void actionPerformed(GUIEvent e) {
+    if (e.getSource() == levelEditor) {
+      println("Level Editor was clicked");
+      setScene("levelEditor");
+    }
+    else if (e.getSource() == levelPlayer) {
+      println("Level Player was clicked");
+    }
+  }
+  
+  public void show() {
+    background(super.bg_color);
+  }
+  
+  public String toString() {
+    return "mainMenu";
+  }
 }

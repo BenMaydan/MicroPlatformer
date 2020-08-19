@@ -12,15 +12,34 @@ public class Scene {
     bg_color = bg;
   }
   
+  public void createButtons() {
+    
+  }
+  
   public void addButton(IFButton button) {
-    buttons.add(button);
     gc.add(button);
+    buttons.add(button);
   }
   
-  public void switchScene() {
-    for (IFButton b : buttons)
-      gc.remove(b);
+  public Scene setupScene() {
+    return this;
   }
   
-  public void show() {}
+  public void reset() {
+    for (int i = 0; i < buttons.size(); i++)
+      gc.remove((IFButton)buttons.remove(i));
+  }
+  
+  public void actionPerformed(GUIEvent e) {
+    
+  }
+  
+  public void show() {
+    background(bg_color);
+  }
+  
+  public String toString() {
+    return "Default Scene";
+  }
+  
 }
